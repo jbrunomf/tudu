@@ -3,12 +3,14 @@ import {IUser} from '../user/IUser';
 import {Task} from './task/task';
 import {DUMMYTASKS} from '../DUMMY-TASKS';
 import {TaskModel} from './task/task.model';
+import {NewTask} from './new-task/new-task';
 
 
 @Component({
   selector: 'app-tasks',
   imports: [
-    Task
+    Task,
+    NewTask
   ],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
@@ -19,11 +21,17 @@ export class Tasks {
   @Input() user?: IUser;
   tasks: TaskModel[] = [...DUMMYTASKS];
 
+  isAddingTask: boolean = false;
+
   get selectedUserTasks() {
     return this.tasks.filter(task => task.userId === this.user?.id);
   }
 
   onTaskComplete(id: number) {
     this.tasks = this.tasks.filter(task => task.id !== id);
+  }
+
+  protected onStartAddTask() {
+    this.isAddingTask = true;
   }
 }
