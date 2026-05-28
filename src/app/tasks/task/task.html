@@ -4,8 +4,7 @@
     <p>{{ task.summary }}</p>
     <time>{{ task.dueDate }}</time>
     <div class="actions">
-      <button>Edit</button>
-      <button>Delete</button>
+      <button (click)="onCompleteTask()">Finalizar</button>
     </div>
   </article>
 } @else {
