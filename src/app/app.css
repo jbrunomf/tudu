@@ -37,4 +37,8 @@ main {
     font-size: 1.5rem;
     text-align: left;
   }
+
+  .users {
+    list-style-type: none;
+  }
 }

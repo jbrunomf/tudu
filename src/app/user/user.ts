@@ -12,7 +12,7 @@ export class User {
 
   // @Output() selectUser = new EventEmitter<number>();
 
-  selectUser = output<number>();
+  selectUser = output<IUser>();
   user = input.required<IUser>();
 
   get userImagePath() {
@@ -20,6 +20,6 @@ export class User {
   }
 
   protected onUserClick() {
-    this.selectUser.emit(this.user().id);
+    this.selectUser.emit(this.user());
   }
 }

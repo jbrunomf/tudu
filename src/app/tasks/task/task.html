@@ -1,0 +1,13 @@
+@if (task) {
+  <article>
+    <h2>{{ task.title }}</h2>
+    <p>{{ task.summary }}</p>
+    <time>{{ task.dueDate }}</time>
+    <div class="actions">
+      <button>Edit</button>
+      <button>Delete</button>
+    </div>
+  </article>
+} @else {
+  <p>Nenhuma tarefa para {{ user.name }}</p>
+}
