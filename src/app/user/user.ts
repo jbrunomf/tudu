@@ -8,9 +8,8 @@ import {IUser} from './IUser';
   styleUrl: './user.css',
 })
 export class User {
-  // @Input({required: true}) user!: IUser;
 
-  // @Output() selectUser = new EventEmitter<number>();
+  @Input({required: true}) selected = false;
 
   selectUser = output<IUser>();
   user = input.required<IUser>();
