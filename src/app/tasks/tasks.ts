@@ -18,7 +18,7 @@ import {NewTask} from './new-task/new-task';
 
 
 export class Tasks {
-  @Input() user?: IUser;
+  @Input() user: IUser | undefined;
   tasks: TaskModel[] = [...DUMMYTASKS];
 
   isAddingTask: boolean = false;

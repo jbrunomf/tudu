@@ -1,9 +1,12 @@
 import {Component, EventEmitter, Input, input, output, Output} from '@angular/core';
 import {IUser} from './IUser';
+import {Card} from '../shared/card/card';
 
 @Component({
   selector: 'app-user',
-  imports: [],
+  imports: [
+    Card
+  ],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
@@ -15,7 +18,7 @@ export class User {
   user = input.required<IUser>();
 
   get userImagePath() {
-    return `users/${this.user().avatar}`
+    return `users/${this.user()?.avatar}`
   }
 
   protected onUserClick() {
