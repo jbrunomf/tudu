@@ -1,9 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, Injectable, Input} from '@angular/core';
 import {IUser} from '../user/IUser';
 import {Task} from './task/task';
-import {DUMMYTASKS} from '../DUMMY-TASKS';
-import {NewTaskData, TaskModel} from './task/task.model';
 import {NewTask} from './new-task/new-task';
+import {TasksService} from './tasks.service';
+import {NewTaskData} from './task/task.model';
 
 
 @Component({
@@ -19,16 +19,13 @@ import {NewTask} from './new-task/new-task';
 
 export class Tasks {
   @Input() user: IUser | undefined;
-  tasks: TaskModel[] = [...DUMMYTASKS];
-
   isAddingTask: boolean = false;
 
-  get selectedUserTasks() {
-    return this.tasks.filter(task => task.userId === this.user?.id);
+  constructor(private service: TasksService) {
   }
 
-  onTaskComplete(id: number) {
-    this.tasks = this.tasks.filter(task => task.id !== id);
+  get selectedUserTasks() {
+    return this.service.getUserTasks(this.user?.id ?? 0);
   }
 
   protected onStartAddTask() {
@@ -39,10 +36,14 @@ export class Tasks {
     this.isAddingTask = false;
   }
 
+  onTaskComplete(id: number) {
+    this.service.tasks = this.service.tasks.filter(task => task.id !== id);
+  }
+
   protected onAddTask(task: NewTaskData) {
-    this.tasks.unshift(
+    this.service.tasks.unshift(
       {
-        id: this.tasks.length + 1,
+        id: this.service.tasks.length + 1,
         title: task.title,
         summary: task.summary,
         dueDate: task.dueDate,
@@ -51,4 +52,5 @@ export class Tasks {
     )
     this.isAddingTask = false;
   }
+
 }
