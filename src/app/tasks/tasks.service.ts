@@ -11,7 +11,7 @@ export class TasksService {
   }
 
 
-  protected addTask(task: NewTaskData, userId: number) {
+  addTask(task: NewTaskData, userId: number) {
     this.tasks.unshift(
       {
         id: this.tasks.length + 1,
@@ -23,7 +23,7 @@ export class TasksService {
     )
   }
 
-  removeTask(id: number) {
+  completeTask(id: number) {
     this.tasks = this.tasks.filter(task => task.id !== id);
   }
 }

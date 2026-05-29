@@ -4,6 +4,7 @@ import {Task} from './task/task';
 import {NewTask} from './new-task/new-task';
 import {TasksService} from './tasks.service';
 import {NewTaskData} from './task/task.model';
+import {getAnalyticsUserId} from '@angular/cli/src/analytics/analytics';
 
 
 @Component({
@@ -37,20 +38,6 @@ export class Tasks {
   }
 
   onTaskComplete(id: number) {
-    this.service.tasks = this.service.tasks.filter(task => task.id !== id);
+    this.service.completeTask(id)
   }
-
-  protected onAddTask(task: NewTaskData) {
-    this.service.tasks.unshift(
-      {
-        id: this.service.tasks.length + 1,
-        title: task.title,
-        summary: task.summary,
-        dueDate: task.dueDate,
-        userId: this.user?.id!
-      }
-    )
-    this.isAddingTask = false;
-  }
-
 }
