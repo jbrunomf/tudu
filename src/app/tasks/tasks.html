@@ -11,7 +11,7 @@
       </menu>
     </header>
     @for (task of selectedUserTasks; track task.id) {
-      <app-task [task]="task" (complete)="onTaskComplete($event)"/>
+      <app-task [task]="task" />
     }
   </section>
 }

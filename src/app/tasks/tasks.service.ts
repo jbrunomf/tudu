@@ -6,10 +6,18 @@ import {Injectable} from '@angular/core';
 export class TasksService {
   tasks: TaskModel[] = [...DUMMYTASKS];
 
+  constructor() {
+    const tasks = localStorage.getItem('tasks');
+
+    if (tasks) {
+      this.tasks = JSON.parse(tasks);
+    }
+  }
+
+
   getUserTasks(userId: number) {
     return this.tasks.filter(task => task.userId === userId);
   }
-
 
   addTask(task: NewTaskData, userId: number) {
     this.tasks.unshift(
@@ -20,10 +28,17 @@ export class TasksService {
         dueDate: task.dueDate,
         userId: userId
       }
-    )
+    );
+
+    this.saveTasks();
   }
 
   completeTask(id: number) {
     this.tasks = this.tasks.filter(task => task.id !== id);
+    this.saveTasks();
+  }
+
+  private saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 }
